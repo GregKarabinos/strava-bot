@@ -78,7 +78,7 @@ def get_csrf_token(session: requests.Session) -> str:
     return match.group(1)
 
 
-def find_activities(session: requests.Session) -> set[str]:
+def find_activities(session):
     """Get recent activity IDs from the wife's profile page."""
     url = f"https://www.strava.com/athletes/{WIFE_ATHLETE_ID}"
     log.info(f"Checking profile: {url}")
