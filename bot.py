@@ -40,13 +40,13 @@ logging.basicConfig(
 log = logging.getLogger("strava-kudos")
 
 
-def load_history() -> set[str]:
+def load_history():
     if KUDOS_HISTORY.exists():
         return set(json.loads(KUDOS_HISTORY.read_text()))
     return set()
 
 
-def save_history(history: set[str]):
+def save_history(history):
     KUDOS_HISTORY.write_text(json.dumps(sorted(history), indent=2))
 
 
