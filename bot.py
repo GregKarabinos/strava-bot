@@ -63,10 +63,10 @@ def create_session() -> requests.Session:
     return session
 
 
-def get_csrf_token(session: requests.Session) -> str:
+def get_csrf_token(session):
     """Fetch a CSRF token from the dashboard."""
     resp = session.get("https://www.strava.com/dashboard")
-    if "/login" in resp.url:
+    if resp.url.rstrip("/").endswith("/login") or "/session" in resp.url:
         raise RuntimeError(
             "Not logged in. Log into Strava in Chrome and try again."
         )
@@ -92,7 +92,7 @@ def find_activities(session):
     return activity_ids
 
 
-def give_kudos(session: requests.Session, csrf_token: str, activity_id: str) -> bool:
+def give_kudos(session, csrf_token, activity_id):
     """Give kudos to an activity via the unofficial endpoint."""
     resp = session.post(
         f"https://www.strava.com/feed/activity/{activity_id}/kudo",
