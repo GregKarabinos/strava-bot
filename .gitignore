@@ -1,0 +1,8 @@
+.env
+browser_state.json
+kudos_history.json
+bot.log
+cron.log
+chrome_profile/
+*.png
+profile_page.html
